@@ -19,15 +19,21 @@ jobs:
       - name: Test output
         run: echo "Deploying to production server on branch $GITHUB_REF"
         
-      - run: echo ${{ github.event }}
-        
-      - name: Get the version from the tag
-        id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+     # - run: echo "GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c 1-6)" >> $GITHUB_ENV
+
+       # if: github.event.pull_request.labels[0] != null
 
       - name: Checkout code
         uses: actions/checkout@v2
-        
+
+      - name: Get the version from the tag
+        id: get_version
+        #run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+        run: echo "GITHUB_SHA_SHORT=$(cat setup.py | grep version | grep -o \"'.*'\" | sed \"s/'//g\")" >> $GITHUB_ENV
+
+      - run: echo $GITHUB_SHA_SHORT
+
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
