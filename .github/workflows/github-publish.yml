@@ -1,12 +1,5 @@
 on:
   workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'     
-        required: true
-        default: 'warning'
-      tags:
-        description: 'Manual test of deploy'  
   push:
     # Sequence of patterns matched against refs/tags
     tags:
@@ -30,8 +23,6 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           body: |
-            Changes in this Release
-            - First Change
-            - Second Change
+            ${{ github.event.head_commit.message }}
           draft: false
           prerelease: false
