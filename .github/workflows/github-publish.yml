@@ -16,10 +16,15 @@ jobs:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
-      - name: Get the version
+      - name: Test output
+        run: echo "Deploying to production server on branch $GITHUB_REF"
+        
+      - run: echo ${{ github.event }}
+        
+      - name: Get the version from the tag
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
-        
+
       - name: Checkout code
         uses: actions/checkout@v2
         
