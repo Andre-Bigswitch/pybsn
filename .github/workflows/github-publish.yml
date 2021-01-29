@@ -1,5 +1,9 @@
 on:
   workflow_dispatch: # Allows this workflow to be manually triggered
+  inputs:
+      releaseName:
+        description: 'Name for this release (e.g. "3.2.1")'     
+        required: true
   push:
     # Sequence of patterns matched against refs/tags
     tags:
