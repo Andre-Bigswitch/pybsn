@@ -2,16 +2,16 @@ name: Run Tests
 on:
   workflow_dispatch: # Allows this workflow to be manually triggered
   push:
-    branches: [ master ]
+    branches: [ master ] # Run against every push to master
   pull_request:
-    branches: [ master ]
+    branches: [ master ] # Run against every PR filed against master
 
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.5, 3.6, 3.7, 3.8, 3.9]
+        python-version: [2.7, 3.5, 3.6, 3.7, 3.8, 3.9]
     steps:
     - uses: actions/checkout@v2
       
