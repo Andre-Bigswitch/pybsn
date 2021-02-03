@@ -26,7 +26,7 @@ jobs:
         pip install setuptools wheel twine
 
     - name: Choose Twine Repository
-    - run: |
+      run: |
         if [ -z "${{ github.event.inputs.twineRepo }}" ]; then
             echo TWINE_REPO=pypi >> $GITHUB_ENV
         else
